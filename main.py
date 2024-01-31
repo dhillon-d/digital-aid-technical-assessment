@@ -16,6 +16,8 @@ distribution = {str(uuid.uuid4()): {'type': 'clothes', 'amount': 1,
                                     'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}}
 inventory = {'money': 35, 'clothes': 1, 'food': 0}
 
+# Database API
+
 
 def donate(name, type, amount):
     # add donor if they don't exist
@@ -30,12 +32,33 @@ def donate(name, type, amount):
     else:
         inventory[type] = amount
 
+    return True
+
 
 def distribute(type, amount):
-    print('hi')
+    # check if type exists in inventory
+    if type not in inventory:
+        return False
+    # check if enough amount of type exists to distribute
+    if inventory[type] < amount:
+        return False
+    # update inventory
+    inventory[type] -= amount
+
+    return True
 
 
-print('DONORS\n', donors)
-print('DONATIONS\n', json.dumps(donations, indent=4))
-print('DISTRIBUTIONS\n', json.dumps(distribution, indent=4))
-print('INVENTORY\n', json.dumps(inventory, indent=4))
+# Test
+
+# print('DONORS\n', donors)
+# print('DONATIONS\n', json.dumps(donations, indent=4))
+# print('DISTRIBUTIONS\n', json.dumps(distribution, indent=4))
+# print('INVENTORY\n', json.dumps(inventory, indent=4))
+
+# donate('Alice', 'money', 35)
+# distribute('money', 10)
+
+# print('DONORS\n', donors)
+# print('DONATIONS\n', json.dumps(donations, indent=4))
+# print('DISTRIBUTIONS\n', json.dumps(distribution, indent=4))
+# print('INVENTORY\n', json.dumps(inventory, indent=4))
