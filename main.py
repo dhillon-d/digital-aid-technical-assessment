@@ -12,8 +12,8 @@ donations = {str(uuid.uuid4()): {'name': 'bob', 'type': 'money', 'amount': 10,
                                  'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S")},
              str(uuid.uuid4()): {'name': 'bob', 'type': 'money', 'amount': 20,
                                  'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}}
-distribution = {str(uuid.uuid4()): {'type': 'clothes', 'amount': 1,
-                                    'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}}
+distributions = {str(uuid.uuid4()): {'type': 'clothes', 'amount': 1,
+                                     'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}}
 inventory = {'money': 35, 'clothes': 1, 'food': 0}
 
 # Database API
@@ -42,6 +42,9 @@ def distribute(type, amount):
     # check if enough amount of type exists to distribute
     if inventory[type] < amount:
         return False
+    # add record to distribution table
+    distributions[str(uuid.uuid4())] = {'type': type, 'amount': amount,
+                                        'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
     # update inventory
     inventory[type] -= amount
 
@@ -62,14 +65,14 @@ def generate_donator_report():
     return response
 
 
-# Test
+# Tests
 
 generated_inventory_report = generate_inventory_report()
 generated_donator_report = generate_donator_report()
 
 print('DONORS\n', donors)
 print('DONATIONS\n', json.dumps(donations, indent=4))
-print('DISTRIBUTIONS\n', json.dumps(distribution, indent=4))
+print('DISTRIBUTIONS\n', json.dumps(distributions, indent=4))
 print('INVENTORY REPORT\n', json.dumps(generate_inventory_report(), indent=4))
 print('DONATOR REPORT\n', json.dumps(generate_donator_report(), indent=4))
 
@@ -83,6 +86,6 @@ generated_donator_report = generate_donator_report()
 
 print('DONORS\n', donors)
 print('DONATIONS\n', json.dumps(donations, indent=4))
-print('DISTRIBUTIONS\n', json.dumps(distribution, indent=4))
+print('DISTRIBUTIONS\n', json.dumps(distributions, indent=4))
 print('INVENTORY REPORT\n', json.dumps(generate_inventory_report(), indent=4))
 print('DONATOR REPORT\n', json.dumps(generate_donator_report(), indent=4))
