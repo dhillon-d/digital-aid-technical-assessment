@@ -64,28 +64,59 @@ def generate_donator_report():
         response[name] = personal_donation_amount_by_type
     return response
 
+# CLI
+
+
+while True:
+
+    choice = input("What do you want to do ex) type 'a' and hit <enter> to donate:\n\n"
+
+                   "a) donate\n"
+                   "b) distribute\n"
+                   "c) generate inventory report\n"
+                   "d) generate donator report\n\n"
+
+                   "Enter 'q' and hit <enter> to quit anytime.\n")
+
+    if choice == 'q':
+        print('Exiting')
+        break
+    elif choice == 'a':
+        name = input("Enter name ex) henry: ")
+        type = input("Enter type ex) clothes: ")
+        amount = input("Enter amount as number ex) 4: ")
+        donate(name, type, amount)
+    elif choice == 'b':
+        type = input("Enter type ex) clothes: ")
+        amount = input("Enter amount as number ex) 4: ")
+        distribute(type, amount)
+    elif choice == 'c':
+        generate_inventory_report()
+    elif choice == 'd':
+        generate_donator_report()
+    else:
+        print("Invalid choice. Please enter valid option.")
 
 # Tests
 
-generated_inventory_report = generate_inventory_report()
-generated_donator_report = generate_donator_report()
+# generated_inventory_report = generate_inventory_report()
+# generated_donator_report = generate_donator_report()
 
-print('DONORS\n', donors)
-print('DONATIONS\n', json.dumps(donations, indent=4))
-print('DISTRIBUTIONS\n', json.dumps(distributions, indent=4))
-print('INVENTORY REPORT\n', json.dumps(generate_inventory_report(), indent=4))
-print('DONATOR REPORT\n', json.dumps(generate_donator_report(), indent=4))
+# print('DONORS\n', donors)
+# print('DONATIONS\n', json.dumps(donations, indent=4))
+# print('DISTRIBUTIONS\n', json.dumps(distributions, indent=4))
+# print('INVENTORY REPORT\n', json.dumps(generate_inventory_report(), indent=4))
+# print('DONATOR REPORT\n', json.dumps(generate_donator_report(), indent=4))
 
-print('-----------------------------------------------------------------')
+# print('-----------------------------------------------------------------')
 
+# donate('Alice', 'money', 35)
+# distribute('money', 10)
+# generated_inventory_report = generate_inventory_report()
+# generated_donator_report = generate_donator_report()
 
-donate('Alice', 'money', 35)
-distribute('money', 10)
-generated_inventory_report = generate_inventory_report()
-generated_donator_report = generate_donator_report()
-
-print('DONORS\n', donors)
-print('DONATIONS\n', json.dumps(donations, indent=4))
-print('DISTRIBUTIONS\n', json.dumps(distributions, indent=4))
-print('INVENTORY REPORT\n', json.dumps(generate_inventory_report(), indent=4))
-print('DONATOR REPORT\n', json.dumps(generate_donator_report(), indent=4))
+# print('DONORS\n', donors)
+# print('DONATIONS\n', json.dumps(donations, indent=4))
+# print('DISTRIBUTIONS\n', json.dumps(distributions, indent=4))
+# print('INVENTORY REPORT\n', json.dumps(generate_inventory_report(), indent=4))
+# print('DONATOR REPORT\n', json.dumps(generate_donator_report(), indent=4))
