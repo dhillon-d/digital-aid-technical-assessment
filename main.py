@@ -64,6 +64,10 @@ def generate_donator_report():
         response[name] = personal_donation_amount_by_type
     return response
 
+
+def generate_distribution_report():
+    return distributions
+
 # CLI
 
 
@@ -74,7 +78,8 @@ while True:
                    "a) donate\n"
                    "b) distribute\n"
                    "c) generate inventory report\n"
-                   "d) generate donator report\n\n"
+                   "d) generate donator report\n"
+                   "e) generate distribution report\n\n"
 
                    "Enter 'q' and hit <enter> to quit anytime.\n\n").lower()
 
@@ -109,6 +114,8 @@ while True:
         print('INVENTORY REPORT\n', json.dumps(generate_inventory_report(), indent=4))
     elif choice == 'd':
         print('DONATOR REPORT\n', json.dumps(generate_donator_report(), indent=4))
+    elif choice == 'e':
+        print('DISTRIBUTION REPORT\n', json.dumps(generate_distribution_report(), indent=4))
     else:
         print("Invalid choice. Please enter valid option.\n")
 
