@@ -68,7 +68,7 @@ def generate_donator_report():
 
 
 while True:
-
+    print('')
     choice = input("What do you want to do ex) type 'a' and hit <enter> to donate:\n\n"
 
                    "a) donate\n"
@@ -76,26 +76,41 @@ while True:
                    "c) generate inventory report\n"
                    "d) generate donator report\n\n"
 
-                   "Enter 'q' and hit <enter> to quit anytime.\n")
+                   "Enter 'q' and hit <enter> to quit anytime.\n\n").lower()
 
     if choice == 'q':
         print('Exiting')
         break
     elif choice == 'a':
         name = input("Enter name ex) henry: ")
+        if name == 'q':
+            print('Exiting')
+            break
         type = input("Enter type ex) clothes: ")
-        amount = input("Enter amount as number ex) 4: ")
+        if type == 'q':
+            print('Exiting')
+            break
+        amount = int(input("Enter amount as number ex) 4: "))
+        if amount == 'q':
+            print('Exiting')
+            break
         donate(name, type, amount)
     elif choice == 'b':
         type = input("Enter type ex) clothes: ")
-        amount = input("Enter amount as number ex) 4: ")
+        if type == 'q':
+            print('Exiting')
+            break
+        amount = int(input("Enter amount as number ex) 4: "))
+        if amount == 'q':
+            print('Exiting')
+            break
         distribute(type, amount)
     elif choice == 'c':
-        generate_inventory_report()
+        print('INVENTORY REPORT\n', json.dumps(generate_inventory_report(), indent=4))
     elif choice == 'd':
-        generate_donator_report()
+        print('DONATOR REPORT\n', json.dumps(generate_donator_report(), indent=4))
     else:
-        print("Invalid choice. Please enter valid option.")
+        print("Invalid choice. Please enter valid option.\n")
 
 # Tests
 
