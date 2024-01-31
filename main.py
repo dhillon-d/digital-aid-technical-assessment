@@ -48,17 +48,41 @@ def distribute(type, amount):
     return True
 
 
+def generate_inventory_report():
+    return inventory
+
+
+def generate_donator_report():
+    response = {}
+    for name in donors:
+        personal_donations = {key: value for key, value in donations.items() if value['name'] == name}
+        personal_donation_amount_by_type = {type_: sum(entry['amount'] for entry in personal_donations.values() if entry['type'] == type_)
+                                            for type_ in set(entry['type'] for entry in personal_donations.values())}
+        response[name] = personal_donation_amount_by_type
+    return response
+
+
 # Test
 
-# print('DONORS\n', donors)
-# print('DONATIONS\n', json.dumps(donations, indent=4))
-# print('DISTRIBUTIONS\n', json.dumps(distribution, indent=4))
-# print('INVENTORY\n', json.dumps(inventory, indent=4))
+generated_inventory_report = generate_inventory_report()
+generated_donator_report = generate_donator_report()
 
-# donate('Alice', 'money', 35)
-# distribute('money', 10)
+print('DONORS\n', donors)
+print('DONATIONS\n', json.dumps(donations, indent=4))
+print('DISTRIBUTIONS\n', json.dumps(distribution, indent=4))
+print('INVENTORY REPORT\n', json.dumps(generate_inventory_report(), indent=4))
+print('DONATOR REPORT\n', json.dumps(generate_donator_report(), indent=4))
 
-# print('DONORS\n', donors)
-# print('DONATIONS\n', json.dumps(donations, indent=4))
-# print('DISTRIBUTIONS\n', json.dumps(distribution, indent=4))
-# print('INVENTORY\n', json.dumps(inventory, indent=4))
+print('-----------------------------------------------------------------')
+
+
+donate('Alice', 'money', 35)
+distribute('money', 10)
+generated_inventory_report = generate_inventory_report()
+generated_donator_report = generate_donator_report()
+
+print('DONORS\n', donors)
+print('DONATIONS\n', json.dumps(donations, indent=4))
+print('DISTRIBUTIONS\n', json.dumps(distribution, indent=4))
+print('INVENTORY REPORT\n', json.dumps(generate_inventory_report(), indent=4))
+print('DONATOR REPORT\n', json.dumps(generate_donator_report(), indent=4))
