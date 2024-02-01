@@ -24,14 +24,25 @@
 ### Data Model
 
 _Donors_
-| name |
-|------|
+
+- name
+
 _Donations_
-| id | name | type | amount | date |
-|----|------|------|--------|------|
+
+- id
+- name
+- type
+- amount
+- date
+
 _Distributions_
-| id | type | amount | date |
-|----|------|--------|------|
+
+- id
+- type
+- amount
+- date
+
 _Inventory_
-| type | amount |
-|------|--------|
+
+- type
+- amount
